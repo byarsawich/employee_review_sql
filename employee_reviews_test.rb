@@ -1,10 +1,25 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require './database_configuration.rb'
+require 'active_record'
+
+ActiveRecord::Base.establish_connection(
+  adapter: 'sqlite3',
+  database: 'test.sqlite3'
+)
+
 require './department'
 require './employee'
+require './employee_review_migration'
 
 class EmployeeReviews < Minitest::Test
+  def setup
+    EmployeeReviewsMigration.migrate(:up)
+  end
+
+  def teardown
+    EmployeeReviewsMigration.migrate(:down)
+  end
+
   def test_classes_exist
     assert Department
     assert Employee
@@ -62,8 +77,8 @@ class EmployeeReviews < Minitest::Test
     old_employee = Employee.new(first_name: "Yvonne", last_name: "Doe", email: "Yvonne@urFired.com", phone_number: "919-123-4567", salary: 40000.00)
     new_employee.set_employee_performance(true)
     old_employee.set_employee_performance(false)
-    assert new_employee.get_employee_performance
-    refute old_employee.get_employee_performance
+    assert new_employee.performance
+    refute old_employee.performance
   end
 
   def test_give_raise_by_percent

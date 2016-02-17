@@ -1,5 +1,3 @@
-require './database_configuration.rb'
-
 class EmployeeReviewsMigration < ActiveRecord::Migration
   def change
     create_table :departments do |t|
@@ -16,7 +14,7 @@ class EmployeeReviewsMigration < ActiveRecord::Migration
       t.string :phone_number
       t.decimal :salary, precision: 10, scale: 2
       t.text :review
-      t.integer :performance
+      t.boolean :performance
     end
   end
 end

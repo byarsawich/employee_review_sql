@@ -34,10 +34,6 @@ class Employee < ActiveRecord::Base
     self.performance = boolean
   end
 
-  def get_employee_performance
-    self.performance == 1 ? true : false
-  end
-
   def raise_by_percent(raise_percentage)
     self.salary += (self.salary * raise_percentage)
   end
