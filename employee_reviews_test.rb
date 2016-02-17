@@ -24,8 +24,8 @@ class EmployeeReviews < Minitest::Test
   def test_can_add_employee_to_a_department
     a = Department.new(name: "Marketing")
     new_employee = Employee.new(first_name: "Dan", last_name: "Doe", email: "d@mail.com", phone_number: "914-555-5555", salary: 50000.00)
-    a.add_employee(new_employee)
-    assert_equal [new_employee], a.staff
+    a.employee << new_employee
+    assert_equal [new_employee], a.employee
   end
 
   def test_can_get_employee_name

@@ -1,8 +1,8 @@
 class Department < ActiveRecord::Base
-  # has_many :employee
+  has_many :employee
 
   def add_employee(new_employee)
-    # new_employee.department_id = self.id
+    self.employee << new_employee
   end
 
   def department_salary
