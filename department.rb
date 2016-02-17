@@ -6,7 +6,7 @@ class Department < ActiveRecord::Base
   end
 
   def department_salary
-    @staff.reduce(0.0) {|sum, e| sum + e.salary}
+    self.employee.reduce(0.0) {|sum, e| sum + e.salary}
   end
 
   def add_employee_review(review)
