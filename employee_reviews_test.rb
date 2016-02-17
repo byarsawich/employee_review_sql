@@ -113,7 +113,7 @@ class EmployeeReviews < Minitest::Test
   def test_evaluate_employee_review
     xavier = Employee.new(first_name: "Xavier", last_name: "Donner", email: "ProfX@marvel.com", phone_number: "911", salary: 70000.00)
     xavier.add_employee_review(positive_review_one)
-    assert xavier.satisfactory
+    assert xavier.performance
   end
 
   private def negative_review_one
