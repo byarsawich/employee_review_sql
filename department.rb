@@ -1,8 +1,8 @@
-require './employee'
-
 class Department < ActiveRecord::Base
+  # has_many :employee
+
   def add_employee(new_employee)
-    @staff << new_employee
+    # new_employee.department_id = self.id
   end
 
   def department_salary

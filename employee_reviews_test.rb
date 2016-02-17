@@ -2,6 +2,7 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require './database_configuration.rb'
 require './department'
+require './employee'
 
 class EmployeeReviews < Minitest::Test
   def test_classes_exist
@@ -21,7 +22,7 @@ class EmployeeReviews < Minitest::Test
   end
 
   def test_can_add_employee_to_a_department
-    a = Department.new("Marketing")
+    a = Department.new(name: "Marketing")
     new_employee = Employee.new(first_name: "Dan", last_name: "Doe", email: "d@mail.com", phone_number: "914-555-5555", salary: 50000.00)
     a.add_employee(new_employee)
     assert_equal [new_employee], a.staff
@@ -38,12 +39,12 @@ class EmployeeReviews < Minitest::Test
   end
 
   def test_can_get_a_department_name
-    a = Department.new("Marketing")
+    a = Department.new(name: "Marketing")
     assert_equal "Marketing", a.name
   end
 
   def test_total_department_salary
-    a = Department.new("Marketing")
+    a = Department.new(name: "Marketing")
     new_employee = Employee.new(first_name: "Dan", last_name: "Doe", email: "d@mail.com", phone_number: "914-555-5555", salary: 50000.00)
     old_employee = Employee.new(first_name: "Yvonne", last_name: "Doe", email: "Yvonne@urFired.com", phone_number: "919-123-4567", salary: 40000.00)
     assert a.add_employee(new_employee)
@@ -59,10 +60,10 @@ class EmployeeReviews < Minitest::Test
   def test_set_employee_performance
     new_employee = Employee.new(first_name: "Dan", last_name: "Doe", email: "d@mail.com", phone_number: "914-555-5555", salary: 50000.00)
     old_employee = Employee.new(first_name: "Yvonne", last_name: "Doe", email: "Yvonne@urFired.com", phone_number: "919-123-4567", salary: 40000.00)
-    new_employee.set_employee_performance(1)
-    old_employee.set_employee_performance(0)
-    assert_equal 1, new_employee.performance
-    assert_equal 0, old_employee.performance
+    new_employee.set_employee_performance(true)
+    old_employee.set_employee_performance(false)
+    assert new_employee.get_employee_performance
+    refute old_employee.get_employee_performance
   end
 
   def test_give_raise_by_percent
@@ -76,7 +77,7 @@ class EmployeeReviews < Minitest::Test
   end
 
   def test_department_raises_based_on_criteria
-    a = Department.new("Marketing")
+    a = Department.new(name: "Marketing")
     xavier = Employee.new(first_name: "Xavier", last_name: "Donner", email: "ProfX@marvel.com", phone_number: "911", salary: 70000.00)
     new_employee = Employee.new(first_name: "Dan", last_name: "Doe", email: "d@mail.com", phone_number: "914-555-5555", salary: 50000.00)
     old_employee = Employee.new(first_name: "Yvonne", last_name: "Doe", email: "Yvonne@urFired.com", phone_number: "919-123-4567", salary: 40000.00)

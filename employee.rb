@@ -1,4 +1,6 @@
 class Employee < ActiveRecord::Base
+  # belongs_to :department
+
   def name
     self.middle_name != nil ? "#{self.first_name} #{self.middle_name} #{self.last_name}" : "#{self.first_name} #{self.last_name}"
   end
@@ -30,6 +32,10 @@ class Employee < ActiveRecord::Base
 
   def set_employee_performance(boolean)
     self.performance = boolean
+  end
+
+  def get_employee_performance
+    self.performance == 1 ? true : false
   end
 
   def raise_by_percent(raise_percentage)
