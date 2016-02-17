@@ -61,8 +61,8 @@ class EmployeeReviews < Minitest::Test
     old_employee = Employee.new(first_name: "Yvonne", last_name: "Doe", email: "Yvonne@urFired.com", phone_number: "919-123-4567", salary: 40000.00)
     new_employee.set_employee_performance(1)
     old_employee.set_employee_performance(0)
-    assert new_employee.performance
-    refute old_employee.performance
+    assert_equal 1, new_employee.performance
+    assert_equal 0, old_employee.performance
   end
 
   def test_give_raise_by_percent

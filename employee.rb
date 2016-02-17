@@ -25,11 +25,11 @@ class Employee < ActiveRecord::Base
       matches = self.review.scan(r).count
       negative_matches += matches
     end
-    performance = (positive_matches > negative_matches)
+    self.performance = (positive_matches > negative_matches)
   end
 
   def set_employee_performance(boolean)
-    performance = boolean
+    self.performance = boolean
   end
 
   def raise_by_percent(raise_percentage)
