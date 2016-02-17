@@ -1,5 +1,5 @@
 class Employee < ActiveRecord::Base
-  belongs_to :department
+  belongs_to :departments
 
   def name
     self.middle_name != nil ? "#{self.first_name} #{self.middle_name} #{self.last_name}" : "#{self.first_name} #{self.last_name}"

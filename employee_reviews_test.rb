@@ -39,8 +39,8 @@ class EmployeeReviews < Minitest::Test
   def test_can_add_employee_to_a_department
     a = Department.new(name: "Marketing")
     new_employee = Employee.new(first_name: "Dan", last_name: "Doe", email: "d@mail.com", phone_number: "914-555-5555", salary: 50000.00)
-    a.employee << new_employee
-    assert_equal [new_employee], a.employee
+    a.employees << new_employee
+    assert_equal [new_employee], a.employees
   end
 
   def test_can_get_employee_name
@@ -83,12 +83,14 @@ class EmployeeReviews < Minitest::Test
 
   def test_give_raise_by_percent
     new_employee = Employee.new(first_name: "Dan", last_name: "Doe", email: "d@mail.com", phone_number: "914-555-5555", salary: 50000.00)
-    assert_equal 54000, new_employee.raise_by_percent(0.08)
+    new_employee.raise_by_percent(0.08)
+    assert_equal 54000, new_employee.salary
   end
 
   def test_give_raise_by_amount
     new_employee = Employee.new(first_name: "Dan", last_name: "Doe", email: "d@mail.com", phone_number: "914-555-5555", salary: 50000.00)
-    assert_equal 60000, new_employee.raise_by_amount(10000)
+    new_employee.raise_by_amount(10000)
+    assert_equal 60000, new_employee.salary
   end
 
   def test_department_raises_based_on_criteria
@@ -102,7 +104,7 @@ class EmployeeReviews < Minitest::Test
     xavier.set_employee_performance(true)
     new_employee.set_employee_performance(true)
     old_employee.set_employee_performance(false)
-    a.department_raise(14000.00) {|e| e.satisfactory == true && e.salary < 60000.00}
+    a.department_raise(14000.00) {|e| e.performance == true && e.salary < 60000.00}
     assert_equal 70000.00, xavier.salary
     assert_equal 64000.00, new_employee.salary
     assert_equal 40000.00, old_employee.salary
